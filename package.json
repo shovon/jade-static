@@ -1,0 +1,25 @@
+{
+    "name": "jade-static"
+  , "version": "1.0.0"
+  , "description": "Serve static Jade files from an Express server."
+  , "keywords": [
+      "express"
+    , "jade"
+    , "middleware"
+  ]
+  , "author": {
+      "name": "Salehen Shovon Rahman"
+    , "email": "salehen.rahman@gmail.com"
+    , "url": "http://shovon.github.com/"
+  }
+  , "dependencies": {
+    "jade": "0.26.x"
+  }
+  , "engines" : {
+    "node": ">=0.4.0"
+  }
+  , "directories": {
+    "lib": "lib"
+  }
+  , "main": "./lib/index.coffee"
+}
