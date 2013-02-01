@@ -10,8 +10,7 @@ readAndSendTemplate = (d, res, next) ->
 
         # Anything screws up, then move on.
         if err?
-            next()
-            return
+            return next()
 
         res.send jade.compile(data, {})({}), { 'Content-Type': 'text/html' }, 200
 
@@ -43,11 +42,8 @@ module.exports = (options) ->
                         readAndSendTemplate "#{d}/index.jade", res, next
                     else
                         next()
-                        return
 
             else if not err? and stats.isFile() and path.extname(d) is '.jade'
                 readAndSendTemplate d, res, next
-
             else
                 next()
-                return
