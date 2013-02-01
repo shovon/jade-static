@@ -25,7 +25,7 @@ checkFileAndProcess = (d, res, next) ->
 
         # If it exists, then we got ourselves a jade file.
         if not err? and stats.isFile()
-            readAndSendTemplate "#{d}/index.jade", res, next
+            readAndSendTemplate d, res, next
         else
             next()
 
