@@ -15,6 +15,18 @@ readAndSendTemplate = (d, res, next) ->
         res.send jade.compile(data, {})({}), { 'Content-Type': 'text/html' }, 200
 
 
+checkFileAndProcess = (d, res, next) ->
+
+    # Check if file is exists
+    fs.lstat d, (err, stats) ->
+
+        # If it exists, then we got ourselves a jade file.
+        if not err? and stats.isFile()
+            readAndSendTemplate "#{d}/index.jade", res, next
+        else
+            next()
+
+
 module.exports = (options) ->
     if not options?
         throw new Error("A path must be specified.")
@@ -35,15 +47,15 @@ module.exports = (options) ->
             if not err? and stats.isDirectory()
 
                 # If so, check if there is exists a file called index.jade.
-                fs.lstat "#{d}/index.jade", (err, stats) ->
-
-                    # If it exists, then we got ourselves a jade file.
-                    if not err? and stats.isFile()
-                        readAndSendTemplate "#{d}/index.jade", res, next
-                    else
-                        next()
+                checkFileAndProcess "#{d}/index.jade", res, next
 
             else if not err? and stats.isFile() and path.extname(d) is '.jade'
                 readAndSendTemplate d, res, next
+                
+            # try to replace html file by jade template
+            else if options.html? and path.extname(d) is '.html'
+
+                # check template exists
+                checkFileAndProcess d.replace(/html$/, 'jade'), res, next
             else
                 next()
