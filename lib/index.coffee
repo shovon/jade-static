@@ -12,7 +12,10 @@ readAndSendTemplate = (d, res, next) ->
         if err?
             return next()
 
-        res.send jade.compile(data, {})({}), { 'Content-Type': 'text/html' }, 200
+        try
+            res.send jade.compile(data, {})({}), { 'Content-Type': 'text/html' }, 200
+        catch err
+            next err
 
 
 checkFileAndProcess = (d, res, next) ->
