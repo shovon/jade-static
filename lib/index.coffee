@@ -2,15 +2,18 @@ path = require 'path'
 fs = require 'fs'
 jade = require 'jade'
 
-module.exports = (dir) ->
-    if not dir?
+module.exports = (options) ->
+    if not options?
         throw new Error("A path must be specified.")
+
+    if typeof options is 'string'
+        options = {src: options}
 
     # The actual middleware itself.
     return (req, res, next) ->
 
         # The inputed url relative to the path.
-        d = path.join dir, req.url
+        d = path.join options.src, req.url
 
         # Determines what d is.
         fs.lstat d, (err, stats) ->
