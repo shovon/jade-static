@@ -35,7 +35,7 @@ module.exports = (options) ->
         throw new Error("A path must be specified.")
 
     if typeof options is 'string'
-        options = {src: options}
+        options = src: options, html: true
 
     # The actual middleware itself.
     return (req, res, next) ->
