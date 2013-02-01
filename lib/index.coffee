@@ -2,6 +2,20 @@ path = require 'path'
 fs = require 'fs'
 jade = require 'jade'
 
+
+readAndSendTemplate = (d, res, next) ->
+
+    # Read the jade file.
+    fs.readFile d, 'utf8', (err, data) ->
+
+        # Anything screws up, then move on.
+        if err?
+            next()
+            return
+
+        res.send jade.compile(data, {})({}), { 'Content-Type': 'text/html' }, 200
+
+
 module.exports = (options) ->
     if not options?
         throw new Error("A path must be specified.")
@@ -26,31 +40,13 @@ module.exports = (options) ->
 
                     # If it exists, then we got ourselves a jade file.
                     if not err? and stats.isFile()
-
-                        # Read the jade file.
-                        fs.readFile "#{d}/index.jade", 'utf8', (err, data) ->
-
-                            # Anything screws up, then move on.
-                            if err?
-                                next()
-                                return
-                            
-                            res.send jade.compile(data, {})({}), { 'Content-Type': 'text/html' }, 200
-
-                            return 
+                        readAndSendTemplate "#{d}/index.jade", res, next
                     else
                         next()
                         return
 
             else if not err? and stats.isFile() and path.extname(d) is '.jade'
-                fs.readFile d, 'utf8', (err, data) ->
-                    if err?
-                        next()
-                        return
-
-                    res.send jade.compile(data, {})({}), { 'Content-Type': 'text/html' }, 200
-
-                    return 
+                readAndSendTemplate d, res, next
 
             else
                 next()
