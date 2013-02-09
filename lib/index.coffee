@@ -37,6 +37,9 @@ module.exports = (options) ->
     if typeof options is 'string'
         options = src: options, html: true
 
+    if typeof options.html is 'undefined'
+        options.html = true
+
     # The actual middleware itself.
     return (req, res, next) ->
 
