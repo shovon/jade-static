@@ -2,15 +2,49 @@ path = require 'path'
 fs = require 'fs'
 jade = require 'jade'
 
-module.exports = (dir) ->
-    if not dir?
+
+readAndSendTemplate = (d, res, next) ->
+
+    # Read the jade file.
+    fs.readFile d, 'utf8', (err, data) ->
+
+        # Anything screws up, then move on.
+        if err?
+            return next()
+
+        try
+            res.send jade.compile(data, {})({}), { 'Content-Type': 'text/html' }, 200
+        catch err
+            next err
+
+
+checkFileAndProcess = (d, res, next) ->
+
+    # Check if file is exists
+    fs.lstat d, (err, stats) ->
+
+        # If it exists, then we got ourselves a jade file.
+        if not err? and stats.isFile()
+            readAndSendTemplate d, res, next
+        else
+            next()
+
+
+module.exports = (options) ->
+    if not options?
         throw new Error("A path must be specified.")
+
+    if typeof options is 'string'
+        options = src: options, html: true
+
+    if typeof options.html is 'undefined'
+        options.html = true
 
     # The actual middleware itself.
     return (req, res, next) ->
 
         # The inputed url relative to the path.
-        d = path.join dir, req.url
+        d = path.join options.src, req.url
 
         # Determines what d is.
         fs.lstat d, (err, stats) ->
@@ -19,36 +53,15 @@ module.exports = (dir) ->
             if not err? and stats.isDirectory()
 
                 # If so, check if there is exists a file called index.jade.
-                fs.lstat "#{d}/index.jade", (err, stats) ->
-
-                    # If it exists, then we got ourselves a jade file.
-                    if not err? and stats.isFile()
-
-                        # Read the jade file.
-                        fs.readFile "#{d}/index.jade", 'utf8', (err, data) ->
-
-                            # Anything screws up, then move on.
-                            if err?
-                                next()
-                                return
-                            
-                            res.send jade.compile(data, {})({}), { 'Content-Type': 'text/html' }, 200
-
-                            return 
-                    else
-                        next()
-                        return
+                checkFileAndProcess "#{d}/index.jade", res, next
 
             else if not err? and stats.isFile() and path.extname(d) is '.jade'
-                fs.readFile d, 'utf8', (err, data) ->
-                    if err?
-                        next()
-                        return
+                readAndSendTemplate d, res, next
+                
+            # try to replace html file by jade template
+            else if options.html? and path.extname(d) is '.html'
 
-                    res.send jade.compile(data, {})({}), { 'Content-Type': 'text/html' }, 200
-
-                    return 
-
+                # check template exists
+                checkFileAndProcess d.replace(/html$/, 'jade'), res, next
             else
                 next()
-                return

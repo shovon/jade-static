@@ -13,6 +13,13 @@
     , "email": "salehen.rahman@gmail.com"
     , "url": "http://shovon.github.com/"
   }
+  , "contributors": [
+      {
+          "name": "Vyacheslav Slinko"
+        , "email": "vyacheslav.slinko@gmail.com"
+        , "url": "http://github.com/vslinko/"
+      }
+  ]
   , "licenses": [
     {
         "type": "MIT"
