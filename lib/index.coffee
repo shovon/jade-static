@@ -13,7 +13,9 @@ readAndSendTemplate = (d, res, next) ->
             return next()
 
         try
-            res.send jade.compile(data, {})({}), { 'Content-Type': 'text/html' }, 200
+            template = jade.compile data, filename: d
+            html = template {}
+            res.send html, 'Content-Type': 'text/html', 200
         catch err
             next err
 
