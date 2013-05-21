@@ -1,6 +1,6 @@
 {
     "name": "jade-static"
-  , "version": "1.0.1"
+  , "version": "1.1.0"
   , "description": "Serve static Jade files from an Express server."
   , "homepage": "http://github.com/shovon/jade-static.git"
   , "keywords": [
