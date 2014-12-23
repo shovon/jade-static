@@ -1,43 +1,58 @@
 {
-    "name": "jade-static"
-  , "version": "1.1.0"
-  , "description": "Serve static Jade files from an Express server."
-  , "homepage": "http://github.com/shovon/jade-static.git"
-  , "keywords": [
-      "express"
-    , "jade"
-    , "middleware"
-  ]
-  , "author": {
-      "name": "Salehen Shovon Rahman"
-    , "email": "salehen.rahman@gmail.com"
-    , "url": "http://shovon.github.com/"
-  }
-  , "contributors": [
-      {
-          "name": "Vyacheslav Slinko"
-        , "email": "vyacheslav.slinko@gmail.com"
-        , "url": "http://github.com/vslinko/"
-      }
-  ]
-  , "licenses": [
+  "name": "jade-static",
+  "version": "1.1.0",
+  "scripts": {
+    "test": "mocha test/*.spec.coffee",
+    "pretest": "coffee --bare --output ./lib --compile ./src/*.coffee"
+  },
+  "description": "Serve static Jade files from an Express server.",
+  "homepage": "http://github.com/shovon/jade-static.git",
+  "keywords": [
+    "express",
+    "jade",
+    "middleware"
+  ],
+  "author": {
+    "name": "Salehen Shovon Rahman",
+    "email": "salehen.rahman@gmail.com",
+    "url": "http://shovon.github.com/"
+  },
+  "contributors": [
     {
-        "type": "MIT"
-      , "url": "http://creativecommons.org/licenses/MIT/"
+      "name": "Vyacheslav Slinko",
+      "email": "vyacheslav.slinko@gmail.com",
+      "url": "http://github.com/vslinko/"
+    },
+    {
+      "name": "Alex Gorbatchev",
+      "url": "http://github.com/alexgorbatchev/"
     }
-  ]
-  , "repository": {
-      "type": "git"
-    , "url": "http://github.com/shovon/jade-static.git"
-  }
-  , "dependencies": {
-    "jade": "0.26.x"
-  }
-  , "engines" : {
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://creativecommons.org/licenses/MIT/"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/shovon/jade-static.git"
+  },
+  "dependencies": {
+    "jade": "*"
+  },
+  "engines": {
     "node": ">=0.4.0"
-  }
-  , "directories": {
+  },
+  "directories": {
     "lib": "lib"
+  },
+  "main": "./lib/jade-static.js",
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "coffee-script": "^1.8.0",
+    "express": "^4.10.6",
+    "mocha": "^2.1.0",
+    "supertest": "^0.15.0"
   }
-  , "main": "./lib/index.coffee"
 }
