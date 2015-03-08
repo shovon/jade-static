@@ -1,6 +1,6 @@
 {
   "name": "jade-static",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "scripts": {
     "test": "mocha test/*.spec.coffee",
     "pretest": "coffee --bare --output ./lib --compile ./src/*.coffee"
@@ -14,7 +14,7 @@
   ],
   "author": {
     "name": "Salehen Shovon Rahman",
-    "email": "salehen.rahman@gmail.com",
+    "email": "sal@linux.com",
     "url": "http://shovon.github.com/"
   },
   "contributors": [
