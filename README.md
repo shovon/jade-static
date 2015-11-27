@@ -1,25 +1,36 @@
 # jade-static
 
+[![npm version](https://badge.fury.io/js/jade-static.svg)](https://badge.fury.io/js/jade-static)
+[![Build Status][http://img.shields.io/travis/shovon/jade-static/master.svg]][https://travis-ci.org/shovon/jade-static]
+[![Coverage][http://img.shields.io/coveralls/shovon/jade-static/master.svg]][https://coveralls.io/r/shovon/jade-static]
+[![GitHub version](https://badge.fury.io/gh/shovon%2Fjade-static.svg)](https://badge.fury.io/gh/shovon%2Fjade-static)
+
 Serve static Jade templates from an Express server.
 
 ## Installing
 
 It's an NPM package. You can just do the following.
 
-    npm install jade-static
+```js
+npm install jade-static
+```
 
 ## Usage
 
 Import it via node's require function.
 
-    var jadeStatic = require('jade-static');
+```js
+var jadeStatic = require('jade-static');
+```
 
 Then, you would simply add it as a `use`d middleware when you configure your Express server.
 
-    var server = express();
+```
+var server = express();
 
-    // You can watch just about any folder to serve the static Jade files.
-    server.use(jadeStatic("#{__dirname}/public/"));
+// You can watch just about any folder to serve the static Jade files.
+server.use(jadeStatic("#{__dirname}/public/"));
+```
 
 ## Why?
 
