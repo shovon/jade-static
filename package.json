@@ -2,8 +2,9 @@
   "name": "jade-static",
   "version": "1.1.2",
   "scripts": {
-    "test": "mocha test/*.spec.coffee",
-    "pretest": "coffee --bare --output ./lib --compile ./src/*.coffee"
+    "test": "mocha && istanbul report text-summary lcov",
+    "pretest": "coffee --bare --output ./lib --compile ./src/*.coffee",
+    "cov": "cat coverage/lcov.info | coveralls"
   },
   "description": "Serve static Jade files from an Express server.",
   "homepage": "http://github.com/shovon/jade-static.git",
@@ -45,8 +46,11 @@
   "main": "./lib/jade-static.js",
   "devDependencies": {
     "chai": "^1.10.0",
+    "coffee-coverage": "^0.7.0",
     "coffee-script": "^1.8.0",
+    "coveralls": "^2.11.4",
     "express": "^4.10.6",
+    "istanbul": "^0.4.1",
     "mocha": "^2.1.0",
     "supertest": "^0.15.0"
   }
