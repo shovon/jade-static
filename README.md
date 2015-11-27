@@ -11,20 +11,26 @@ Serve static Jade templates from an Express server.
 
 It's an NPM package. You can just do the following.
 
-    npm install jade-static
+```js
+npm install jade-static
+```
 
 ## Usage
 
 Import it via node's require function.
 
-    var jadeStatic = require('jade-static');
+```js
+var jadeStatic = require('jade-static');
+```
 
 Then, you would simply add it as a `use`d middleware when you configure your Express server.
 
-    var server = express();
+```
+var server = express();
 
-    // You can watch just about any folder to serve the static Jade files.
-    server.use(jadeStatic("#{__dirname}/public/"));
+// You can watch just about any folder to serve the static Jade files.
+server.use(jadeStatic("#{__dirname}/public/"));
+```
 
 ## Why?
 
