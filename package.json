@@ -28,12 +28,7 @@
       "url": "http://github.com/alexgorbatchev/"
     }
   ],
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://creativecommons.org/licenses/MIT/"
-    }
-  ],
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "http://github.com/shovon/jade-static.git"
